@@ -3,11 +3,14 @@
 #include <thread>
 #include <opencv2/core.hpp>
 #include <opencv2/videoio.hpp>
-#include <opencv2/highgui.hpp>
+#include <opencv2/imgcodecs.hpp>
 
 int main(int, char**) {
     cv::VideoCapture cap;
     cap.open(0);
+
+    cap.set(cv::CAP_PROP_FRAME_HEIGHT, 1080);
+    cap.set(cv::CAP_PROP_FRAME_WIDTH, 1920);
 
     if (!cap.isOpened())
     {
@@ -33,9 +36,7 @@ int main(int, char**) {
         return -2;
     }
 
-    cv::namedWindow("Preview", cv::WINDOW_AUTOSIZE);
-    cv::imshow("Preview", frameReference);
-
-    cv::waitKey(0);
+    cv::imwrite("capture.jpg", frameReference);
+    
     return 0;
 }
