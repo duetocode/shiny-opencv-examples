@@ -2,7 +2,6 @@
 #include <string>
 #include <opencv2/core.hpp>
 #include <opencv2/imgcodecs.hpp>
-#include <opencv2/highgui.hpp>
 
 const std::string filename = "assets/ada-lovelace.jpeg";
 const std::string windowName = "Preview";
@@ -19,10 +18,11 @@ int main()
         return -1;
     }
 
-    cv::namedWindow(windowName, cv::WINDOW_AUTOSIZE);
-    cv::imshow(windowName, image);
+    cv::Size size = image.size();
 
-    cv::waitKey(0);
+    std::cout << "Image" << std::endl;
+    std::cout << "\tSize: " << size.width << "x" << size.height << std::endl;
+    std::cout << "\tChannels: " << image.channels() << std::endl;
     
     return 0;
 }
